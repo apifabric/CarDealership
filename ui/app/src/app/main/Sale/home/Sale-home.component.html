@@ -1,0 +1,60 @@
+<o-form-layout-manager attr="Sale" mode="tab" title="SALE">
+    <div fxFill fxLayout="column" fxLayoutAlign="start">
+        <o-table 
+            attr="SaleTable" 
+            service="Sale" 
+            entity="Sale" 
+            title="SALE"
+            keys="id"
+            columns="id;car_id;customer_id;salesperson_id;sale_date" 
+            header-actions="R;D"
+            visible-columns="id;car_id;customer_id;salesperson_id;sale_date"  
+            sort-columns="id" 
+            query-rows="20" 
+            quick-filter="yes"
+            row-height="medium" 
+            select-all-checkbox="true" 
+            pageable="yes"  
+            auto-adjust="true" 
+            virtual-scroll="yes" 
+            edition-mode="dblclick"
+            horizontal-scroll="yes"
+            show-title="yes"
+            export-button="yes">
+            
+            <o-table-column #id attr="id" title=" id*" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+            
+            <o-table-column attr="car_id" title="car_id">
+    <o-table-cell-renderer-service attr="car_id" 
+        service="Car" entity="CarType" columns="id;id"
+        parent-keys="id:car_id"
+        value-column="id" keys="car_id"
+        visible-columns="id" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+            
+            <o-table-column attr="customer_id" title="customer_id">
+    <o-table-cell-renderer-service attr="customer_id" 
+        service="Customer" entity="CustomerType" columns="id;first_name"
+        parent-keys="id:customer_id"
+        value-column="first_name" keys="customer_id"
+        visible-columns="first_name" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+            
+            <o-table-column attr="salesperson_id" title="salesperson_id">
+    <o-table-cell-renderer-service attr="salesperson_id" 
+        service="Salesperson" entity="SalespersonType" columns="id;first_name"
+        parent-keys="id:salesperson_id"
+        value-column="first_name" keys="salesperson_id"
+        visible-columns="first_name" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+            
+            <o-date-input #sale_date attr="sale_date" type="date" label="sale_date" enabled="yes" required="no" format="LL" fxFlex="20%" class="form-field"></o-date-input>
+            
+            <o-table-context-menu></o-table-context-menu>
+            <o-table-paginator page-size-options="24;48;96"></o-table-paginator>
+        </o-table>
+    </div>
+</o-form-layout-manager>

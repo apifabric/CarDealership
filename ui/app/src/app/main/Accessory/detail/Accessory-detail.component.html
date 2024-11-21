@@ -1,0 +1,142 @@
+<div class="container">
+<o-form-container breadcrumb="yes" breadcrumb-label-columns="name" breadcrumb-separator=", " class="fill-form">
+      <o-form #form attr="Accessory_form_edit" 
+        service="Accessory" 
+        entity="Accessory" 
+        fxLayout="column" 
+        show-header="yes" 
+        header-actions="R;I;U;D"
+        #oDetailForm keys="id" 
+        keys-sql-types="INTEGER" 
+        show-header-navigation="yes"
+        (onDataLoaded)="onDataLoaded($event)">
+
+  <o-row attr="row1" layout-align="start stretch">
+    <div fxLayout="row wrap" fxLayoutAlign="start start" fxFlex fxLayoutGap="14px">
+      
+      <o-text-input #name attr="name" label=" name*" enabled="yes" required="no" fxFlex="20%" class="form-field"></o-text-input>
+      
+      <o-integer-input #price attr="price" label="price" type="integer" editable="no" required="no" ></o-integer-input>
+      
+      <o-integer-input #id attr="id" label="id" type="integer" editable="no" required="no" ></o-integer-input>
+      
+    </div>
+  </o-row>
+      
+      <mat-tab-group fxFill>
+        
+        <mat-tab label="INVENTORY-accessory_id">
+    <div layout-padding>
+      <o-table 
+        attr="InventoryTable" 
+        service="Inventory" 
+        entity="Inventory" 
+        keys="id"
+        parent-keys="accessory_id:id"
+        columns="id;accessory_id;car_id;quantity_in_stock"  
+        horizontal-scroll="yes"
+        detail-form-route="Inventory" 
+        edit-form-route="Inventory"
+        visible-columns="id;accessory_id;car_id;quantity_in_stock"  
+        sort-columns="id" 
+        query-rows="25" 
+        quick-filter="yes"
+        row-height="medium" 
+        select-all-checkbox="true" 
+        pageable="yes"  
+        auto-adjust="true" 
+        virtual-scroll="yes" 
+        insert-button="yes" 
+        delete-button="yes" 
+        fixed-header="true" 
+        class="vertical-padding-8"
+        edition-mode="dblclick" 
+        horizontal-scroll="yes" class="fill-form">
+        
+          <o-table-column #id attr="id" title=" id*" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+        
+          <o-table-column attr="accessory_id" title="accessory_id">
+    <o-table-cell-renderer-service attr="accessory_id" 
+        service="Accessory" entity="AccessoryType" columns="id;name"
+        parent-keys="id:accessory_id"
+        value-column="name" keys="accessory_id"
+        visible-columns="name" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+        
+          <o-table-column attr="car_id" title="car_id">
+    <o-table-cell-renderer-service attr="car_id" 
+        service="Car" entity="CarType" columns="id;id"
+        parent-keys="id:car_id"
+        value-column="id" keys="car_id"
+        visible-columns="id" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+        
+          <o-table-column #quantity_in_stock attr="quantity_in_stock" title="quantity_in_stock" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+        
+        <o-table-paginator page-size-options="25;50;100"></o-table-paginator>
+      </o-table>
+    </div>
+</mat-tab>
+        
+        <mat-tab label="ORDERITEM-accessory_id">
+    <div layout-padding>
+      <o-table 
+        attr="OrderItemTable" 
+        service="OrderItem" 
+        entity="OrderItem" 
+        keys="id"
+        parent-keys="accessory_id:id"
+        columns="id;accessory_id;order_id;quantity"  
+        horizontal-scroll="yes"
+        detail-form-route="OrderItem" 
+        edit-form-route="OrderItem"
+        visible-columns="id;accessory_id;order_id;quantity"  
+        sort-columns="id" 
+        query-rows="25" 
+        quick-filter="yes"
+        row-height="medium" 
+        select-all-checkbox="true" 
+        pageable="yes"  
+        auto-adjust="true" 
+        virtual-scroll="yes" 
+        insert-button="yes" 
+        delete-button="yes" 
+        fixed-header="true" 
+        class="vertical-padding-8"
+        edition-mode="dblclick" 
+        horizontal-scroll="yes" class="fill-form">
+        
+          <o-table-column #id attr="id" title=" id*" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+        
+          <o-table-column attr="accessory_id" title="accessory_id">
+    <o-table-cell-renderer-service attr="accessory_id" 
+        service="Accessory" entity="AccessoryType" columns="id;name"
+        parent-keys="id:accessory_id"
+        value-column="name" keys="accessory_id"
+        visible-columns="name" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+        
+          <o-table-column attr="order_id" title="order_id">
+    <o-table-cell-renderer-service attr="order_id" 
+        service="Order" entity="OrderType" columns="id;id"
+        parent-keys="id:order_id"
+        value-column="id" keys="order_id"
+        visible-columns="id" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+        
+          <o-table-column #quantity attr="quantity" title="quantity" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+        
+        <o-table-paginator page-size-options="25;50;100"></o-table-paginator>
+      </o-table>
+    </div>
+</mat-tab>
+        
+      </mat-tab-group>
+      
+    </o-form>
+  </o-form-container>
+</div>

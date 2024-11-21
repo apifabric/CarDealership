@@ -1,0 +1,257 @@
+<div class="container">
+<o-form-container breadcrumb="yes" breadcrumb-label-columns="id" breadcrumb-separator=", " class="fill-form">
+      <o-form #form attr="Car_form_edit" 
+        service="Car" 
+        entity="Car" 
+        fxLayout="column" 
+        show-header="yes" 
+        header-actions="R;I;U;D"
+        #oDetailForm keys="id" 
+        keys-sql-types="INTEGER" 
+        show-header-navigation="yes"
+        (onDataLoaded)="onDataLoaded($event)">
+
+  <o-row attr="row1" layout-align="start stretch">
+    <div fxLayout="row wrap" fxLayoutAlign="start start" fxFlex fxLayoutGap="14px">
+      
+      <o-integer-input #id attr="id" label=" id*" type="integer" editable="no" required="no" ></o-integer-input>
+      
+      <o-text-input #make attr="make" label="make" enabled="yes" required="no" fxFlex="20%" class="form-field"></o-text-input>
+      
+      <o-text-input #model attr="model" label="model" enabled="yes" required="no" fxFlex="20%" class="form-field"></o-text-input>
+      
+      <o-integer-input #year attr="year" label="year" type="integer" editable="no" required="no" ></o-integer-input>
+      
+      <o-integer-input #price attr="price" label="price" type="integer" editable="no" required="no" ></o-integer-input>
+      
+    </div>
+  </o-row>
+      
+      <mat-tab-group fxFill>
+        
+        <mat-tab label="INVENTORY-car_id">
+    <div layout-padding>
+      <o-table 
+        attr="InventoryTable" 
+        service="Inventory" 
+        entity="Inventory" 
+        keys="id"
+        parent-keys="car_id:id"
+        columns="id;accessory_id;car_id;quantity_in_stock"  
+        horizontal-scroll="yes"
+        detail-form-route="Inventory" 
+        edit-form-route="Inventory"
+        visible-columns="id;accessory_id;car_id;quantity_in_stock"  
+        sort-columns="id" 
+        query-rows="25" 
+        quick-filter="yes"
+        row-height="medium" 
+        select-all-checkbox="true" 
+        pageable="yes"  
+        auto-adjust="true" 
+        virtual-scroll="yes" 
+        insert-button="yes" 
+        delete-button="yes" 
+        fixed-header="true" 
+        class="vertical-padding-8"
+        edition-mode="dblclick" 
+        horizontal-scroll="yes" class="fill-form">
+        
+          <o-table-column #id attr="id" title=" id*" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+        
+          <o-table-column attr="accessory_id" title="accessory_id">
+    <o-table-cell-renderer-service attr="accessory_id" 
+        service="Accessory" entity="AccessoryType" columns="id;name"
+        parent-keys="id:accessory_id"
+        value-column="name" keys="accessory_id"
+        visible-columns="name" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+        
+          <o-table-column attr="car_id" title="car_id">
+    <o-table-cell-renderer-service attr="car_id" 
+        service="Car" entity="CarType" columns="id;id"
+        parent-keys="id:car_id"
+        value-column="id" keys="car_id"
+        visible-columns="id" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+        
+          <o-table-column #quantity_in_stock attr="quantity_in_stock" title="quantity_in_stock" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+        
+        <o-table-paginator page-size-options="25;50;100"></o-table-paginator>
+      </o-table>
+    </div>
+</mat-tab>
+        
+        <mat-tab label="SALE-car_id">
+    <div layout-padding>
+      <o-table 
+        attr="SaleTable" 
+        service="Sale" 
+        entity="Sale" 
+        keys="id"
+        parent-keys="car_id:id"
+        columns="id;car_id;customer_id;salesperson_id;sale_date"  
+        horizontal-scroll="yes"
+        detail-form-route="Sale" 
+        edit-form-route="Sale"
+        visible-columns="id;car_id;customer_id;salesperson_id;sale_date"  
+        sort-columns="id" 
+        query-rows="25" 
+        quick-filter="yes"
+        row-height="medium" 
+        select-all-checkbox="true" 
+        pageable="yes"  
+        auto-adjust="true" 
+        virtual-scroll="yes" 
+        insert-button="yes" 
+        delete-button="yes" 
+        fixed-header="true" 
+        class="vertical-padding-8"
+        edition-mode="dblclick" 
+        horizontal-scroll="yes" class="fill-form">
+        
+          <o-table-column #id attr="id" title=" id*" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+        
+          <o-table-column attr="car_id" title="car_id">
+    <o-table-cell-renderer-service attr="car_id" 
+        service="Car" entity="CarType" columns="id;id"
+        parent-keys="id:car_id"
+        value-column="id" keys="car_id"
+        visible-columns="id" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+        
+          <o-table-column attr="customer_id" title="customer_id">
+    <o-table-cell-renderer-service attr="customer_id" 
+        service="Customer" entity="CustomerType" columns="id;first_name"
+        parent-keys="id:customer_id"
+        value-column="first_name" keys="customer_id"
+        visible-columns="first_name" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+        
+          <o-table-column attr="salesperson_id" title="salesperson_id">
+    <o-table-cell-renderer-service attr="salesperson_id" 
+        service="Salesperson" entity="SalespersonType" columns="id;first_name"
+        parent-keys="id:salesperson_id"
+        value-column="first_name" keys="salesperson_id"
+        visible-columns="first_name" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+        
+          <o-date-input #sale_date attr="sale_date" type="date" label="sale_date" enabled="yes" required="no" format="LL" fxFlex="20%" class="form-field"></o-date-input>
+        
+        <o-table-paginator page-size-options="25;50;100"></o-table-paginator>
+      </o-table>
+    </div>
+</mat-tab>
+        
+        <mat-tab label="SERVICE-car_id">
+    <div layout-padding>
+      <o-table 
+        attr="ServiceTable" 
+        service="Service" 
+        entity="Service" 
+        keys="id"
+        parent-keys="car_id:id"
+        columns="description;car_id;service_date;cost;id"  
+        horizontal-scroll="yes"
+        detail-form-route="Service" 
+        edit-form-route="Service"
+        visible-columns="description;car_id;service_date;cost;id"  
+        sort-columns="description" 
+        query-rows="25" 
+        quick-filter="yes"
+        row-height="medium" 
+        select-all-checkbox="true" 
+        pageable="yes"  
+        auto-adjust="true" 
+        virtual-scroll="yes" 
+        insert-button="yes" 
+        delete-button="yes" 
+        fixed-header="true" 
+        class="vertical-padding-8"
+        edition-mode="dblclick" 
+        horizontal-scroll="yes" class="fill-form">
+        
+          <o-table-column #description attr="description" title=" description*" editable="no" required="no" content-align="left"></o-table-column>
+        
+          <o-table-column attr="car_id" title="car_id">
+    <o-table-cell-renderer-service attr="car_id" 
+        service="Car" entity="CarType" columns="id;id"
+        parent-keys="id:car_id"
+        value-column="id" keys="car_id"
+        visible-columns="id" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+        
+          <o-date-input #service_date attr="service_date" type="date" label="service_date" enabled="yes" required="no" format="LL" fxFlex="20%" class="form-field"></o-date-input>
+        
+          <o-table-column #cost attr="cost" title="cost" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+        
+          <o-table-column #id attr="id" title="id" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+        
+        <o-table-paginator page-size-options="25;50;100"></o-table-paginator>
+      </o-table>
+    </div>
+</mat-tab>
+        
+        <mat-tab label="WARRANTY-car_id">
+    <div layout-padding>
+      <o-table 
+        attr="WarrantyTable" 
+        service="Warranty" 
+        entity="Warranty" 
+        keys="id"
+        parent-keys="car_id:id"
+        columns="id;car_id;warranty_start_date;warranty_end_date;warranty_provider;coverage_details"  
+        horizontal-scroll="yes"
+        detail-form-route="Warranty" 
+        edit-form-route="Warranty"
+        visible-columns="id;car_id;warranty_start_date;warranty_end_date;warranty_provider;coverage_details"  
+        sort-columns="id" 
+        query-rows="25" 
+        quick-filter="yes"
+        row-height="medium" 
+        select-all-checkbox="true" 
+        pageable="yes"  
+        auto-adjust="true" 
+        virtual-scroll="yes" 
+        insert-button="yes" 
+        delete-button="yes" 
+        fixed-header="true" 
+        class="vertical-padding-8"
+        edition-mode="dblclick" 
+        horizontal-scroll="yes" class="fill-form">
+        
+          <o-table-column #id attr="id" title=" id*" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+        
+          <o-table-column attr="car_id" title="car_id">
+    <o-table-cell-renderer-service attr="car_id" 
+        service="Car" entity="CarType" columns="id;id"
+        parent-keys="id:car_id"
+        value-column="id" keys="car_id"
+        visible-columns="id" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+        
+          <o-date-input #warranty_start_date attr="warranty_start_date" type="date" label="warranty_start_date" enabled="yes" required="no" format="LL" fxFlex="20%" class="form-field"></o-date-input>
+        
+          <o-date-input #warranty_end_date attr="warranty_end_date" type="date" label="warranty_end_date" enabled="yes" required="no" format="LL" fxFlex="20%" class="form-field"></o-date-input>
+        
+          <o-table-column #warranty_provider attr="warranty_provider" title="warranty_provider" editable="no" required="no" content-align="left"></o-table-column>
+        
+          <o-table-column #coverage_details attr="coverage_details" title="coverage_details" editable="no" required="no" content-align="left"></o-table-column>
+        
+        <o-table-paginator page-size-options="25;50;100"></o-table-paginator>
+      </o-table>
+    </div>
+</mat-tab>
+        
+      </mat-tab-group>
+      
+    </o-form>
+  </o-form-container>
+</div>

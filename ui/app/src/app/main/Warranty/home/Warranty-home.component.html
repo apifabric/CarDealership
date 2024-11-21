@@ -1,0 +1,48 @@
+<o-form-layout-manager attr="Warranty" mode="tab" title="WARRANTY">
+    <div fxFill fxLayout="column" fxLayoutAlign="start">
+        <o-table 
+            attr="WarrantyTable" 
+            service="Warranty" 
+            entity="Warranty" 
+            title="WARRANTY"
+            keys="id"
+            columns="id;car_id;warranty_start_date;warranty_end_date;warranty_provider;coverage_details" 
+            header-actions="R;D"
+            visible-columns="id;car_id;warranty_start_date;warranty_end_date;warranty_provider;coverage_details"  
+            sort-columns="id" 
+            query-rows="20" 
+            quick-filter="yes"
+            row-height="medium" 
+            select-all-checkbox="true" 
+            pageable="yes"  
+            auto-adjust="true" 
+            virtual-scroll="yes" 
+            edition-mode="dblclick"
+            horizontal-scroll="yes"
+            show-title="yes"
+            export-button="yes">
+            
+            <o-table-column #id attr="id" title=" id*" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+            
+            <o-table-column attr="car_id" title="car_id">
+    <o-table-cell-renderer-service attr="car_id" 
+        service="Car" entity="CarType" columns="id;id"
+        parent-keys="id:car_id"
+        value-column="id" keys="car_id"
+        visible-columns="id" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+            
+            <o-date-input #warranty_start_date attr="warranty_start_date" type="date" label="warranty_start_date" enabled="yes" required="no" format="LL" fxFlex="20%" class="form-field"></o-date-input>
+            
+            <o-date-input #warranty_end_date attr="warranty_end_date" type="date" label="warranty_end_date" enabled="yes" required="no" format="LL" fxFlex="20%" class="form-field"></o-date-input>
+            
+            <o-table-column #warranty_provider attr="warranty_provider" title="warranty_provider" editable="no" required="no" content-align="left"></o-table-column>
+            
+            <o-table-column #coverage_details attr="coverage_details" title="coverage_details" editable="no" required="no" content-align="left"></o-table-column>
+            
+            <o-table-context-menu></o-table-context-menu>
+            <o-table-paginator page-size-options="24;48;96"></o-table-paginator>
+        </o-table>
+    </div>
+</o-form-layout-manager>

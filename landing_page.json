@@ -1,0 +1,116 @@
+{
+    "name": "DriveAutoWorld",
+    "logo": {
+        "Type": "Logo",
+        "name": "DriveAutoWorld_Logo",
+        "description": "DriveAutoWorld logo featuring a stylized 'D' intertwined with a steering wheel."
+    },
+    "sections": [
+        {
+            "title": "Welcome to DriveAutoWorld",
+            "subtitle": "Your Premier Destination for New and Used Cars",
+            "name": "HeroSection",
+            "label": "Home",
+            "content": "Discover the car of your dreams at DriveAutoWorld. Explore our extensive inventory, enjoy outstanding customer service, and drive away in the perfect vehicle today.",
+            "order": 1,
+            "Type": "Hero",
+            "images": [
+                {
+                    "Type": "Hero",
+                    "name": "HeroImage_MainCars",
+                    "description": "Exciting display of various car models in the showroom."
+                }
+            ]
+        },
+        {
+            "title": "About Us",
+            "subtitle": "",
+            "name": "AboutSection",
+            "label": "About",
+            "content": "At DriveAutoWorld, we pride ourselves on offering a wide selection of new and pre-owned vehicles. Our mission is to connect our customers with their perfect car while providing exceptional service and support. Discover why our commitment to quality and community sets us apart from the rest.",
+            "order": 2,
+            "Type": "About",
+            "images": [
+                {
+                    "Type": "Background",
+                    "name": "Showroom_Interior",
+                    "description": "A welcoming and modern car dealership showroom interior."
+                }
+            ]
+        },
+        {
+            "title": "Our Services",
+            "subtitle": "Quality Services for Your Automotive Needs",
+            "name": "ServicesSection",
+            "label": "Services",
+            "content": "### Wide Selection of Cars  \nExplore our diverse inventory of new and used cars to find the perfect fit for your lifestyle.\n\n### Financing Options  \nWe offer flexible financing solutions tailored to meet your budget.\n\n### Vehicle Trade-In  \nUpgrade your ride with ease through our seamless trade-in services.\n\n### After-Sales Support  \nBenefit from our comprehensive maintenance and repair services, keeping your vehicle in top condition.\n",
+            "order": 3,
+            "Type": "Services",
+            "images": [
+                {
+                    "Type": "ItemListing",
+                    "name": "CarShowroom_Display",
+                    "description": "Display of various car models from sedans to SUVs."
+                },
+                {
+                    "Type": "Icon",
+                    "name": "Financing_Options_Icon",
+                    "description": "Icon representing financing services."
+                }
+            ]
+        },
+        {
+            "title": "See Our Cars in Action",
+            "subtitle": "A Glimpse into Our Quality Range",
+            "name": "GallerySection",
+            "label": "Gallery",
+            "content": "Explore our gallery showcasing a variety of vehicle models, each featuring sleek designs and state-of-the-art technology.\n",
+            "order": 4,
+            "Type": "Gallery",
+            "images": [
+                {
+                    "Type": "Gallery",
+                    "name": "SUV_SideView",
+                    "description": "Side view of a state-of-the-art SUV parked in a picturesque location."
+                },
+                {
+                    "Type": "Gallery",
+                    "name": "ConvertibleSporty",
+                    "description": "A sporty convertible captured under the sunset."
+                }
+            ]
+        },
+        {
+            "title": "Customer Testimonials",
+            "subtitle": "Hear From Our Satisfied Customers",
+            "name": "TestimonialsSection",
+            "label": "Testimonials",
+            "content": "\"**Excellent Service and Fantastic Cars!** I couldn't be happier with my purchase experience at DriveAutoWorld. The staff was knowledgeable and the selection was incredible!\"  \n\u2014 **Mark T.**\n\n\"**Trusted Dealer for Years!** Always a pleasure to do business with. DriveAutoWorld truly stands out in customer care.\"  \n\u2014 **Sophia R.**\n",
+            "order": 5,
+            "Type": "Testimonials",
+            "images": [
+                {
+                    "Type": "Testimonial",
+                    "name": "HappyCustomer1",
+                    "description": "Photo of a customer receiving their car keys from a sales representative."
+                }
+            ]
+        },
+        {
+            "title": "Contact Us",
+            "subtitle": "We're Here to Help You Find Your Next Car",
+            "name": "ContactSection",
+            "label": "Contact",
+            "content": "### Get in Touch\nWhether you're looking for a new car or need assistance with financing options, our team is here to help you. \n\n- **Phone**: (123) 456-7890  \n- **Email**: contact@driveautoworld.com  \n- **Address**: 1234 Car Lane, Anytown, AT 12345  \n\nVisit our dealership to test drive your dream car today!\n",
+            "order": 6,
+            "Type": "Contact",
+            "images": [
+                {
+                    "Type": "Map",
+                    "name": "Dealership_Location_Map",
+                    "description": "Map image showing the location of DriveAutoWorld."
+                }
+            ]
+        }
+    ]
+}

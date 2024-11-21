@@ -1,0 +1,73 @@
+{
+    "models": [
+        {
+            "classname": "Car",
+            "code": "class Car(Base):\n    \"\"\"description: Represents a car available for sale in the dealership.\"\"\"\n    __tablename__ = 'cars'\n\n    id = Column(Integer, primary_key=True, autoincrement=True)\n    make = Column(String)\n    model = Column(String)\n    year = Column(Integer)\n    price = Column(Integer)",
+            "description": "Represents a car available for sale in the dealership.",
+            "name": "Car"
+        },
+        {
+            "classname": "Customer",
+            "code": "class Customer(Base):\n    \"\"\"description: Represents a customer who buys cars.\"\"\"\n    __tablename__ = 'customers'\n\n    id = Column(Integer, primary_key=True, autoincrement=True)\n    first_name = Column(String)\n    last_name = Column(String)\n    date_of_birth = Column(Date)\n    phone_number = Column(String)",
+            "description": "Represents a customer who buys cars.",
+            "name": "Customer"
+        },
+        {
+            "classname": "Salesperson",
+            "code": "class Salesperson(Base):\n    \"\"\"description: Represents a salesperson working for the dealership.\"\"\"\n    __tablename__ = 'salespersons'\n\n    id = Column(Integer, primary_key=True, autoincrement=True)\n    first_name = Column(String)\n    last_name = Column(String)\n    hire_date = Column(Date)\n    phone_number = Column(String)",
+            "description": "Represents a salesperson working for the dealership.",
+            "name": "Salesperson"
+        },
+        {
+            "classname": "Sale",
+            "code": "class Sale(Base):\n    \"\"\"description: Represents a transaction of selling a car to a customer.\"\"\"\n    __tablename__ = 'sales'\n\n    id = Column(Integer, primary_key=True, autoincrement=True)\n    car_id = Column(Integer, ForeignKey('cars.id'))\n    customer_id = Column(Integer, ForeignKey('customers.id'))\n    salesperson_id = Column(Integer, ForeignKey('salespersons.id'))\n    sale_date = Column(Date)",
+            "description": "Represents a transaction of selling a car to a customer.",
+            "name": "Sale"
+        },
+        {
+            "classname": "Service",
+            "code": "class Service(Base):\n    \"\"\"description: Represents a service record for a car.\"\"\"\n    __tablename__ = 'services'\n\n    id = Column(Integer, primary_key=True, autoincrement=True)\n    car_id = Column(Integer, ForeignKey('cars.id'))\n    service_date = Column(Date)\n    description = Column(String)\n    cost = Column(Integer)",
+            "description": "Represents a service record for a car.",
+            "name": "Service"
+        },
+        {
+            "classname": "Warranty",
+            "code": "class Warranty(Base):\n    \"\"\"description: Represents a warranty purchased for a car.\"\"\"\n    __tablename__ = 'warranties'\n\n    id = Column(Integer, primary_key=True, autoincrement=True)\n    car_id = Column(Integer, ForeignKey('cars.id'))\n    warranty_start_date = Column(Date)\n    warranty_end_date = Column(Date)\n    warranty_provider = Column(String)\n    coverage_details = Column(String)",
+            "description": "Represents a warranty purchased for a car.",
+            "name": "Warranty"
+        },
+        {
+            "classname": "Repair",
+            "code": "class Repair(Base):\n    \"\"\"description: Represents a repair performed on a car.\"\"\"\n    __tablename__ = 'repairs'\n\n    id = Column(Integer, primary_key=True, autoincrement=True)\n    service_id = Column(Integer, ForeignKey('services.id'))\n    repair_date = Column(Date)\n    description = Column(String)\n    repair_cost = Column(Integer)",
+            "description": "Represents a repair performed on a car.",
+            "name": "Repair"
+        },
+        {
+            "classname": "Accessory",
+            "code": "class Accessory(Base):\n    \"\"\"description: Represents a car accessory available for sale.\"\"\"\n    __tablename__ = 'accessories'\n\n    id = Column(Integer, primary_key=True, autoincrement=True)\n    name = Column(String)\n    price = Column(Integer)",
+            "description": "Represents a car accessory available for sale.",
+            "name": "Accessory"
+        },
+        {
+            "classname": "Order",
+            "code": "class Order(Base):\n    \"\"\"description: Represents an order made by a customer for accessories.\"\"\"\n    __tablename__ = 'orders'\n\n    id = Column(Integer, primary_key=True, autoincrement=True)\n    customer_id = Column(Integer, ForeignKey('customers.id'))\n    order_date = Column(Date)",
+            "description": "Represents an order made by a customer for accessories.",
+            "name": "Order"
+        },
+        {
+            "classname": "OrderItem",
+            "code": "class OrderItem(Base):\n    \"\"\"description: Represents an item within an order, linking accessories to orders.\"\"\"\n    __tablename__ = 'order_items'\n\n    id = Column(Integer, primary_key=True, autoincrement=True)\n    order_id = Column(Integer, ForeignKey('orders.id'))\n    accessory_id = Column(Integer, ForeignKey('accessories.id'))\n    quantity = Column(Integer)",
+            "description": "Represents an item within an order, linking accessories to orders.",
+            "name": "OrderItem"
+        },
+        {
+            "classname": "Inventory",
+            "code": "class Inventory(Base):\n    \"\"\"description: Represents inventory levels for cars and accessories at a dealership.\"\"\"\n    __tablename__ = 'inventory'\n\n    id = Column(Integer, primary_key=True, autoincrement=True)\n    car_id = Column(Integer, ForeignKey('cars.id'), nullable=True)\n    accessory_id = Column(Integer, ForeignKey('accessories.id'), nullable=True)\n    quantity_in_stock = Column(Integer)",
+            "description": "Represents inventory levels for cars and accessories at a dealership.",
+            "name": "Inventory"
+        }
+    ],
+    "rules": [],
+    "test_data": "from datetime import date\n\ncar1 = Car(make='Toyota', model='Corolla', year=2020, price=20000)\ncar2 = Car(make='Honda', model='Civic', year=2019, price=18000)\ncar3 = Car(make='Ford', model='Mustang', year=2021, price=30000)\ncar4 = Car(make='Tesla', model='Model 3', year=2021, price=35000)\n\ncustomer1 = Customer(first_name='John', last_name='Doe', date_of_birth=date(1985, 5, 17), phone_number='1234567890')\ncustomer2 = Customer(first_name='Jane', last_name='Smith', date_of_birth=date(1990, 8, 24), phone_number='0987654321')\ncustomer3 = Customer(first_name='Jim', last_name='Beam', date_of_birth=date(1975, 3, 20), phone_number='1122334455')\ncustomer4 = Customer(first_name='Jack', last_name='Daniels', date_of_birth=date(1980, 7, 13), phone_number='2233445566')\n\nsalesperson1 = Salesperson(first_name='Alice', last_name='Johnson', hire_date=date(2010, 6, 15), phone_number='3344556677')\nsalesperson2 = Salesperson(first_name='Bob', last_name='Brown', hire_date=date(2015, 2, 20), phone_number='4455667788')\nsalesperson3 = Salesperson(first_name='Charlie', last_name='Davis', hire_date=date(2018, 11, 5), phone_number='5566778899')\nsalesperson4 = Salesperson(first_name='Dana', last_name='White', hire_date=date(2020, 8, 20), phone_number='6677889900')\n\nsale1 = Sale(car_id=1, customer_id=1, salesperson_id=1, sale_date=date(2022, 1, 10))\nsale2 = Sale(car_id=2, customer_id=2, salesperson_id=2, sale_date=date(2022, 2, 15))\nsale3 = Sale(car_id=3, customer_id=3, salesperson_id=3, sale_date=date(2022, 3, 20))\nsale4 = Sale(car_id=4, customer_id=4, salesperson_id=4, sale_date=date(2022, 4, 25))\n\nservice1 = Service(car_id=1, service_date=date(2022, 5, 1), description='Oil Change', cost=100)\nservice2 = Service(car_id=2, service_date=date(2022, 6, 3), description='Tire Rotation', cost=150)\nservice3 = Service(car_id=3, service_date=date(2022, 7, 5), description='Brake Inspection', cost=200)\nservice4 = Service(car_id=4, service_date=date(2022, 8, 7), description='Battery Replacement', cost=250)\n\nwarranty1 = Warranty(car_id=1, warranty_start_date=date(2022, 1, 5), warranty_end_date=date(2024, 1, 5), warranty_provider='Provider A', coverage_details='Full Coverage')\nwarranty2 = Warranty(car_id=2, warranty_start_date=date(2022, 2, 10), warranty_end_date=date(2024, 2, 10), warranty_provider='Provider B', coverage_details='Basic Coverage')\nwarranty3 = Warranty(car_id=3, warranty_start_date=date(2022, 3, 15), warranty_end_date=date(2024, 3, 15), warranty_provider='Provider C', coverage_details='Extended Coverage')\nwarranty4 = Warranty(car_id=4, warranty_start_date=date(2022, 4, 20), warranty_end_date=date(2024, 4, 20), warranty_provider='Provider D', coverage_details='Limited Coverage')\n\nrepair1 = Repair(service_id=1, repair_date=date(2022, 5, 2), description='Engine Repair', repair_cost=300)\nrepair2 = Repair(service_id=2, repair_date=date(2022, 6, 4), description='Transmission Fix', repair_cost=400)\nrepair3 = Repair(service_id=3, repair_date=date(2022, 7, 6), description='Air Conditioning Repair', repair_cost=500)\nrepair4 = Repair(service_id=4, repair_date=date(2022, 8, 8), description='Windshield Repair', repair_cost=600)\n\naccessory1 = Accessory(name='GPS Navigation System', price=250)\naccessory2 = Accessory(name='Roof Rack', price=120)\naccessory3 = Accessory(name='Car Cover', price=80)\naccessory4 = Accessory(name='Sunshade', price=40)\n\norder1 = Order(customer_id=1, order_date=date(2022, 9, 1))\norder2 = Order(customer_id=2, order_date=date(2022, 10, 15))\norder3 = Order(customer_id=3, order_date=date(2022, 11, 20))\norder4 = Order(customer_id=4, order_date=date(2022, 12, 25))\n\norder_item1 = OrderItem(order_id=1, accessory_id=1, quantity=2)\norder_item2 = OrderItem(order_id=2, accessory_id=2, quantity=1)\norder_item3 = OrderItem(order_id=3, accessory_id=3, quantity=3)\norder_item4 = OrderItem(order_id=4, accessory_id=4, quantity=4)\n\ninventory1 = Inventory(car_id=1, quantity_in_stock=5)\ninventory2 = Inventory(accessory_id=1, quantity_in_stock=10)\ninventory3 = Inventory(car_id=2, quantity_in_stock=3)\ninventory4 = Inventory(accessory_id=2, quantity_in_stock=8)\n",
+    "name": "CarDealership"
+}

@@ -1,0 +1,39 @@
+<o-form-layout-manager attr="Car" mode="tab" title="CAR">
+    <div fxFill fxLayout="column" fxLayoutAlign="start">
+        <o-table 
+            attr="CarTable" 
+            service="Car" 
+            entity="Car" 
+            title="CAR"
+            keys="id"
+            columns="id;make;model;year;price" 
+            header-actions="R;D"
+            visible-columns="id;make;model;year;price"  
+            sort-columns="id" 
+            query-rows="20" 
+            quick-filter="yes"
+            row-height="medium" 
+            select-all-checkbox="true" 
+            pageable="yes"  
+            auto-adjust="true" 
+            virtual-scroll="yes" 
+            edition-mode="dblclick"
+            horizontal-scroll="yes"
+            show-title="yes"
+            export-button="yes">
+            
+            <o-table-column #id attr="id" title=" id*" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+            
+            <o-table-column #make attr="make" title="make" editable="no" required="no" content-align="left"></o-table-column>
+            
+            <o-table-column #model attr="model" title="model" editable="no" required="no" content-align="left"></o-table-column>
+            
+            <o-table-column #year attr="year" title="year" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+            
+            <o-table-column #price attr="price" title="price" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+            
+            <o-table-context-menu></o-table-context-menu>
+            <o-table-paginator page-size-options="24;48;96"></o-table-paginator>
+        </o-table>
+    </div>
+</o-form-layout-manager>

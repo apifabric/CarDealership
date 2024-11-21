@@ -1,0 +1,46 @@
+<o-form-layout-manager attr="Repair" mode="tab" title="REPAIR">
+    <div fxFill fxLayout="column" fxLayoutAlign="start">
+        <o-table 
+            attr="RepairTable" 
+            service="Repair" 
+            entity="Repair" 
+            title="REPAIR"
+            keys="id"
+            columns="description;service_id;repair_date;repair_cost;id" 
+            header-actions="R;D"
+            visible-columns="description;service_id;repair_date;repair_cost;id"  
+            sort-columns="description" 
+            query-rows="20" 
+            quick-filter="yes"
+            row-height="medium" 
+            select-all-checkbox="true" 
+            pageable="yes"  
+            auto-adjust="true" 
+            virtual-scroll="yes" 
+            edition-mode="dblclick"
+            horizontal-scroll="yes"
+            show-title="yes"
+            export-button="yes">
+            
+            <o-table-column #description attr="description" title=" description*" editable="no" required="no" content-align="left"></o-table-column>
+            
+            <o-table-column attr="service_id" title="service_id">
+    <o-table-cell-renderer-service attr="service_id" 
+        service="Service" entity="ServiceType" columns="id;description"
+        parent-keys="id:service_id"
+        value-column="description" keys="service_id"
+        visible-columns="description" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+            
+            <o-date-input #repair_date attr="repair_date" type="date" label="repair_date" enabled="yes" required="no" format="LL" fxFlex="20%" class="form-field"></o-date-input>
+            
+            <o-table-column #repair_cost attr="repair_cost" title="repair_cost" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+            
+            <o-table-column #id attr="id" title="id" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+            
+            <o-table-context-menu></o-table-context-menu>
+            <o-table-paginator page-size-options="24;48;96"></o-table-paginator>
+        </o-table>
+    </div>
+</o-form-layout-manager>

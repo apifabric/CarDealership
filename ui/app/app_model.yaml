@@ -1,0 +1,497 @@
+about:
+  date: November 21, 2024 10:47:54
+  recent_changes: works with modified safrs-react-admin
+  version: 0.0.0
+api_root: '{http_type}://{swagger_host}:{port}/{api}'
+authentication: '{system-default}'
+entities:
+  Accessory:
+    columns:
+    - label: ' name*'
+      name: name
+      search: true
+      sort: true
+      template: text
+      type: VARCHAR
+    - name: price
+      template: integer
+      type: INTEGER
+    - name: id
+      template: integer
+      type: INTEGER
+    description: Represents a car accessory available for sale.
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: name
+    hidden: {}
+    home_template: home_template.html
+    info_list: Represents a car accessory available for sale.
+    label: Accessory
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: tomany
+      fks:
+      - accessory_id
+      name: InventoryList
+      resource: Inventory
+    - direction: tomany
+      fks:
+      - accessory_id
+      name: OrderItemList
+      resource: OrderItem
+    type: Accessory
+  Car:
+    columns:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+      template: integer
+      type: INTEGER
+    - name: make
+      template: text
+      type: VARCHAR
+    - name: model
+      template: text
+      type: VARCHAR
+    - name: year
+      template: integer
+      type: INTEGER
+    - name: price
+      template: integer
+      type: INTEGER
+    description: Represents a car available for sale in the dealership.
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: id
+    hidden: {}
+    home_template: home_template.html
+    info_list: Represents a car available for sale in the dealership.
+    label: Car
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: tomany
+      fks:
+      - car_id
+      name: InventoryList
+      resource: Inventory
+    - direction: tomany
+      fks:
+      - car_id
+      name: SaleList
+      resource: Sale
+    - direction: tomany
+      fks:
+      - car_id
+      name: ServiceList
+      resource: Service
+    - direction: tomany
+      fks:
+      - car_id
+      name: WarrantyList
+      resource: Warranty
+    type: Car
+  Customer:
+    columns:
+    - label: ' first_name*'
+      name: first_name
+      search: true
+      sort: true
+      template: text
+      type: VARCHAR
+    - name: last_name
+      template: text
+      type: VARCHAR
+    - name: date_of_birth
+      type: DATE
+    - name: phone_number
+      template: text
+      type: VARCHAR
+    - name: id
+      template: integer
+      type: INTEGER
+    description: Represents a customer who buys cars.
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: first_name
+    hidden: {}
+    home_template: home_template.html
+    info_list: Represents a customer who buys cars.
+    label: Customer
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: tomany
+      fks:
+      - customer_id
+      name: OrderList
+      resource: Order
+    - direction: tomany
+      fks:
+      - customer_id
+      name: SaleList
+      resource: Sale
+    type: Customer
+  Inventory:
+    columns:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+      template: integer
+      type: INTEGER
+    - name: accessory_id
+      template: integer
+      type: INTEGER
+    - name: car_id
+      template: integer
+      type: INTEGER
+    - name: quantity_in_stock
+      template: integer
+      type: INTEGER
+    description: Represents inventory levels for cars and accessories at a dealership.
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: id
+    hidden: {}
+    home_template: home_template.html
+    info_list: Represents inventory levels for cars and accessories at a dealership.
+    label: Inventory
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: toone
+      fks:
+      - accessory_id
+      name: accessory
+      resource: Accessory
+    - direction: toone
+      fks:
+      - car_id
+      name: car
+      resource: Car
+    type: Inventory
+  Order:
+    columns:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+      template: integer
+      type: INTEGER
+    - name: customer_id
+      template: integer
+      type: INTEGER
+    - name: order_date
+      type: DATE
+    description: Represents an order made by a customer for accessories.
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: id
+    hidden: {}
+    home_template: home_template.html
+    info_list: Represents an order made by a customer for accessories.
+    label: Order
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: tomany
+      fks:
+      - order_id
+      name: OrderItemList
+      resource: OrderItem
+    - direction: toone
+      fks:
+      - customer_id
+      name: customer
+      resource: Customer
+    type: Order
+  OrderItem:
+    columns:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+      template: integer
+      type: INTEGER
+    - name: accessory_id
+      template: integer
+      type: INTEGER
+    - name: order_id
+      template: integer
+      type: INTEGER
+    - name: quantity
+      template: integer
+      type: INTEGER
+    description: Represents an item within an order, linking accessories to orders.
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: id
+    hidden: {}
+    home_template: home_template.html
+    info_list: Represents an item within an order, linking accessories to orders.
+    label: OrderItem
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: toone
+      fks:
+      - accessory_id
+      name: accessory
+      resource: Accessory
+    - direction: toone
+      fks:
+      - order_id
+      name: order
+      resource: Order
+    type: OrderItem
+  Repair:
+    columns:
+    - label: ' description*'
+      name: description
+      search: true
+      sort: true
+      template: text
+      type: VARCHAR
+    - name: service_id
+      template: integer
+      type: INTEGER
+    - name: repair_date
+      type: DATE
+    - name: repair_cost
+      template: integer
+      type: INTEGER
+    - name: id
+      template: integer
+      type: INTEGER
+    description: Represents a repair performed on a car.
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: description
+    hidden: {}
+    home_template: home_template.html
+    info_list: Represents a repair performed on a car.
+    label: Repair
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: toone
+      fks:
+      - service_id
+      name: service
+      resource: Service
+    type: Repair
+  Sale:
+    columns:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+      template: integer
+      type: INTEGER
+    - name: car_id
+      template: integer
+      type: INTEGER
+    - name: customer_id
+      template: integer
+      type: INTEGER
+    - name: salesperson_id
+      template: integer
+      type: INTEGER
+    - name: sale_date
+      type: DATE
+    description: Represents a transaction of selling a car to a customer.
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: id
+    hidden: {}
+    home_template: home_template.html
+    info_list: Represents a transaction of selling a car to a customer.
+    label: Sale
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: toone
+      fks:
+      - car_id
+      name: car
+      resource: Car
+    - direction: toone
+      fks:
+      - customer_id
+      name: customer
+      resource: Customer
+    - direction: toone
+      fks:
+      - salesperson_id
+      name: salesperson
+      resource: Salesperson
+    type: Sale
+  Salesperson:
+    columns:
+    - label: ' first_name*'
+      name: first_name
+      search: true
+      sort: true
+      template: text
+      type: VARCHAR
+    - name: last_name
+      template: text
+      type: VARCHAR
+    - name: hire_date
+      type: DATE
+    - name: phone_number
+      template: text
+      type: VARCHAR
+    - name: id
+      template: integer
+      type: INTEGER
+    description: Represents a salesperson working for the dealership.
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: first_name
+    hidden: {}
+    home_template: home_template.html
+    info_list: Represents a salesperson working for the dealership.
+    label: Salesperson
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: tomany
+      fks:
+      - salesperson_id
+      name: SaleList
+      resource: Sale
+    type: Salesperson
+  Service:
+    columns:
+    - label: ' description*'
+      name: description
+      search: true
+      sort: true
+      template: text
+      type: VARCHAR
+    - name: car_id
+      template: integer
+      type: INTEGER
+    - name: service_date
+      type: DATE
+    - name: cost
+      template: integer
+      type: INTEGER
+    - name: id
+      template: integer
+      type: INTEGER
+    description: Represents a service record for a car.
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: description
+    hidden: {}
+    home_template: home_template.html
+    info_list: Represents a service record for a car.
+    label: Service
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: tomany
+      fks:
+      - service_id
+      name: RepairList
+      resource: Repair
+    - direction: toone
+      fks:
+      - car_id
+      name: car
+      resource: Car
+    type: Service
+  Warranty:
+    columns:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+      template: integer
+      type: INTEGER
+    - name: car_id
+      template: integer
+      type: INTEGER
+    - name: warranty_start_date
+      type: DATE
+    - name: warranty_end_date
+      type: DATE
+    - name: warranty_provider
+      template: text
+      type: VARCHAR
+    - name: coverage_details
+      template: text
+      type: VARCHAR
+    description: Represents a warranty purchased for a car.
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: id
+    hidden: {}
+    home_template: home_template.html
+    info_list: Represents a warranty purchased for a car.
+    label: Warranty
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: toone
+      fks:
+      - car_id
+      name: car
+      resource: Car
+    type: Warranty
+settings:
+  HomeJS: /admin-app/home.js
+  max_list_columns: 8
+  style_guide:
+    applicationLocales:
+    - en
+    - es
+    currency_symbol: $
+    currency_symbol_position: left
+    date_format: LL
+    decimal_max: '1000000000'
+    decimal_min: '0'
+    decimal_separator: .
+    edit_on_mode: dblclick
+    exclude_listpicker: false
+    include_translation: false
+    keycloak_client_id: alsclient
+    keycloak_realm: kcals
+    keycloak_url: http://localhost:8080
+    locale: en
+    max_decimal_digits: '4'
+    min_decimal_digits: '2'
+    mode: tab
+    pick_style: list
+    serviceType: OntimizeEE
+    startSessionPath: /auth/login
+    style: light
+    thousand_separator: ','
+    use_keycloak: false

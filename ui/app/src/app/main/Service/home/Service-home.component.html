@@ -1,0 +1,46 @@
+<o-form-layout-manager attr="Service" mode="tab" title="SERVICE">
+    <div fxFill fxLayout="column" fxLayoutAlign="start">
+        <o-table 
+            attr="ServiceTable" 
+            service="Service" 
+            entity="Service" 
+            title="SERVICE"
+            keys="id"
+            columns="description;car_id;service_date;cost;id" 
+            header-actions="R;D"
+            visible-columns="description;car_id;service_date;cost;id"  
+            sort-columns="description" 
+            query-rows="20" 
+            quick-filter="yes"
+            row-height="medium" 
+            select-all-checkbox="true" 
+            pageable="yes"  
+            auto-adjust="true" 
+            virtual-scroll="yes" 
+            edition-mode="dblclick"
+            horizontal-scroll="yes"
+            show-title="yes"
+            export-button="yes">
+            
+            <o-table-column #description attr="description" title=" description*" editable="no" required="no" content-align="left"></o-table-column>
+            
+            <o-table-column attr="car_id" title="car_id">
+    <o-table-cell-renderer-service attr="car_id" 
+        service="Car" entity="CarType" columns="id;id"
+        parent-keys="id:car_id"
+        value-column="id" keys="car_id"
+        visible-columns="id" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+            
+            <o-date-input #service_date attr="service_date" type="date" label="service_date" enabled="yes" required="no" format="LL" fxFlex="20%" class="form-field"></o-date-input>
+            
+            <o-table-column #cost attr="cost" title="cost" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+            
+            <o-table-column #id attr="id" title="id" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+            
+            <o-table-context-menu></o-table-context-menu>
+            <o-table-paginator page-size-options="24;48;96"></o-table-paginator>
+        </o-table>
+    </div>
+</o-form-layout-manager>

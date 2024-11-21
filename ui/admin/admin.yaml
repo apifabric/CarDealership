@@ -1,0 +1,320 @@
+about:
+  date: November 21, 2024 10:47:54
+  recent_changes: works with modified safrs-react-admin
+  version: 0.0.0
+api_root: '{http_type}://{swagger_host}:{port}/{api}'
+authentication: '{system-default}'
+info:
+  number_relationships: 11
+  number_tables: 11
+info_toggle_checked: true
+resources:
+  Accessory:
+    attributes:
+    - label: ' name*'
+      name: name
+      search: true
+      sort: true
+    - name: price
+    - name: id
+    description: Represents a car accessory available for sale.
+    info_list: Represents a car accessory available for sale.
+    tab_groups:
+    - direction: tomany
+      fks:
+      - accessory_id
+      name: InventoryList
+      resource: Inventory
+    - direction: tomany
+      fks:
+      - accessory_id
+      name: OrderItemList
+      resource: OrderItem
+    type: Accessory
+    user_key: name
+  Car:
+    attributes:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+    - name: make
+    - name: model
+    - name: year
+    - name: price
+    description: Represents a car available for sale in the dealership.
+    info_list: Represents a car available for sale in the dealership.
+    tab_groups:
+    - direction: tomany
+      fks:
+      - car_id
+      name: InventoryList
+      resource: Inventory
+    - direction: tomany
+      fks:
+      - car_id
+      name: SaleList
+      resource: Sale
+    - direction: tomany
+      fks:
+      - car_id
+      name: ServiceList
+      resource: Service
+    - direction: tomany
+      fks:
+      - car_id
+      name: WarrantyList
+      resource: Warranty
+    type: Car
+    user_key: id
+  Customer:
+    attributes:
+    - label: ' first_name*'
+      name: first_name
+      search: true
+      sort: true
+    - name: last_name
+    - name: date_of_birth
+      type: DATE
+    - name: phone_number
+    - name: id
+    description: Represents a customer who buys cars.
+    info_list: Represents a customer who buys cars.
+    tab_groups:
+    - direction: tomany
+      fks:
+      - customer_id
+      name: OrderList
+      resource: Order
+    - direction: tomany
+      fks:
+      - customer_id
+      name: SaleList
+      resource: Sale
+    type: Customer
+    user_key: first_name
+  Inventory:
+    attributes:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+    - name: accessory_id
+    - name: car_id
+    - name: quantity_in_stock
+    description: Represents inventory levels for cars and accessories at a dealership.
+    info_list: Represents inventory levels for cars and accessories at a dealership.
+    tab_groups:
+    - direction: toone
+      fks:
+      - accessory_id
+      name: accessory
+      resource: Accessory
+    - direction: toone
+      fks:
+      - car_id
+      name: car
+      resource: Car
+    type: Inventory
+    user_key: id
+  Order:
+    attributes:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+    - name: customer_id
+    - name: order_date
+      type: DATE
+    description: Represents an order made by a customer for accessories.
+    info_list: Represents an order made by a customer for accessories.
+    tab_groups:
+    - direction: tomany
+      fks:
+      - order_id
+      name: OrderItemList
+      resource: OrderItem
+    - direction: toone
+      fks:
+      - customer_id
+      name: customer
+      resource: Customer
+    type: Order
+    user_key: id
+  OrderItem:
+    attributes:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+    - name: accessory_id
+    - name: order_id
+    - name: quantity
+    description: Represents an item within an order, linking accessories to orders.
+    info_list: Represents an item within an order, linking accessories to orders.
+    tab_groups:
+    - direction: toone
+      fks:
+      - accessory_id
+      name: accessory
+      resource: Accessory
+    - direction: toone
+      fks:
+      - order_id
+      name: order
+      resource: Order
+    type: OrderItem
+    user_key: id
+  Repair:
+    attributes:
+    - label: ' description*'
+      name: description
+      search: true
+      sort: true
+    - name: service_id
+    - name: repair_date
+      type: DATE
+    - name: repair_cost
+    - name: id
+    description: Represents a repair performed on a car.
+    info_list: Represents a repair performed on a car.
+    tab_groups:
+    - direction: toone
+      fks:
+      - service_id
+      name: service
+      resource: Service
+    type: Repair
+    user_key: description
+  Sale:
+    attributes:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+    - name: car_id
+    - name: customer_id
+    - name: salesperson_id
+    - name: sale_date
+      type: DATE
+    description: Represents a transaction of selling a car to a customer.
+    info_list: Represents a transaction of selling a car to a customer.
+    tab_groups:
+    - direction: toone
+      fks:
+      - car_id
+      name: car
+      resource: Car
+    - direction: toone
+      fks:
+      - customer_id
+      name: customer
+      resource: Customer
+    - direction: toone
+      fks:
+      - salesperson_id
+      name: salesperson
+      resource: Salesperson
+    type: Sale
+    user_key: id
+  Salesperson:
+    attributes:
+    - label: ' first_name*'
+      name: first_name
+      search: true
+      sort: true
+    - name: last_name
+    - name: hire_date
+      type: DATE
+    - name: phone_number
+    - name: id
+    description: Represents a salesperson working for the dealership.
+    info_list: Represents a salesperson working for the dealership.
+    tab_groups:
+    - direction: tomany
+      fks:
+      - salesperson_id
+      name: SaleList
+      resource: Sale
+    type: Salesperson
+    user_key: first_name
+  Service:
+    attributes:
+    - label: ' description*'
+      name: description
+      search: true
+      sort: true
+    - name: car_id
+    - name: service_date
+      type: DATE
+    - name: cost
+    - name: id
+    description: Represents a service record for a car.
+    info_list: Represents a service record for a car.
+    tab_groups:
+    - direction: tomany
+      fks:
+      - service_id
+      name: RepairList
+      resource: Repair
+    - direction: toone
+      fks:
+      - car_id
+      name: car
+      resource: Car
+    type: Service
+    user_key: description
+  Warranty:
+    attributes:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+    - name: car_id
+    - name: warranty_start_date
+      type: DATE
+    - name: warranty_end_date
+      type: DATE
+    - name: warranty_provider
+    - name: coverage_details
+    description: Represents a warranty purchased for a car.
+    info_list: Represents a warranty purchased for a car.
+    tab_groups:
+    - direction: toone
+      fks:
+      - car_id
+      name: car
+      resource: Car
+    type: Warranty
+    user_key: id
+settings:
+  HomeJS: /admin-app/home.js
+  max_list_columns: 8
+  style_guide:
+    applicationLocales:
+    - en
+    - es
+    currency_symbol: $
+    currency_symbol_position: left
+    date_format: LL
+    decimal_max: '1000000000'
+    decimal_min: '0'
+    decimal_separator: .
+    detail_mode: tab
+    edit_on_mode: dblclick
+    exclude_listpicker: false
+    include_translation: 'false'
+    keycloak_client_id: alsclient
+    keycloak_realm: kcals
+    keycloak_url: http://localhost:8080
+    locale: en
+    max_decimal_digits: '4'
+    min_decimal_digits: '2'
+    new_mode: dialog
+    pick_style: list
+    row_height: small,
+    serviceType: OntimizeEE
+    startSessionPath: /auth/login
+    style: light
+    thousand_separator: ','
+    use_keycloak: 'false'
